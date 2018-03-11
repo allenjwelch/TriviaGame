@@ -1,0 +1,27 @@
+body {
+  background-image: url("../images/breweryBackground.jpg")
+}
+
+.container {
+  display: flex; 
+  flex-direction: column; 
+}
+
+.jumbotron {
+  margin-top: 50px; 
+  text-align: center; 
+  background: rgba(248, 246, 246, 0.8); 
+}
+
+.btn {
+  margin: 10px; 
+}
+
+/* .btn:focus {
+  background-color: green; 
+} */
+
+.choices {
+  
+}
+
