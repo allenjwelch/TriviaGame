@@ -1,5 +1,16 @@
 body {
-  background-image: url("../images/breweryBackground.jpg")
+  background-image: url("../images/breweryBackground.jpg");
+  font-family: 'Smythe', cursive;
+  /* letter-spacing: 1px;  */
+}
+
+h1 {
+  font-family: 'Irish Grover', cursive;
+  font-size: 50px; 
+}
+
+#start {
+  font-family: 'Chicle', cursive;
 }
 
 .container {
@@ -9,19 +20,31 @@ body {
 
 .jumbotron {
   margin-top: 50px; 
+  padding: 10px;
   text-align: center; 
   background: rgba(248, 246, 246, 0.8); 
 }
 
 .btn {
   margin: 10px; 
+  font-size: 20px; 
 }
 
 /* .btn:focus {
   background-color: green; 
 } */
 
-.choices {
+#comment {
+  color:  rgb(248, 246, 246); 
+  text-shadow: 5px 5px black; 
+  text-align: center; 
+  opacity: 0; 
   
 }
+
+
+
+/* font-family: 'Irish Grover', cursive;
+font-family: 'Smythe', cursive;
+font-family: 'Chicle', cursive; */
 
