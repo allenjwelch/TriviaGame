@@ -1,10 +1,10 @@
 /////////////// Variables /////////////////
 var questionArr = {
-  q1: ["question1", "answerA", "answerB", "answerC", "answerD"], 
-  q2: ["question2", "answerA", "answerB", "answerC", "answerD"], 
-  q3: ["question3", "answerA", "answerB", "answerC", "answerD"],  
-  q4: ["question4", "answerA", "answerB", "answerC", "answerD"],  
-  q5: ["question5", "answerA", "answerB", "answerC", "answerD"], 
+  q1: ["What is the science of brewing beer called?", "Brewology", "Zymurgy", "Distillation", "Saccharomyces"], //Correct answer [2]
+  q2: ["How many styles of beer are recognized by the Brewer’s Association?", "152", "123", "45", "10"], //Correct answer [1]
+  q3: ["What is Atlanta's oldest craft brewery?", "Jekyll", "Red Brick", "Monday Night", "Sweetwater"],  //Correct answer [2]
+  q4: ["About how many years was the length of Prohibition?", "2", "10", "13", "21"],  //Correct answer [3]
+  q5: ["What country has the most individual beer brands?", "Germany", "Croatia", "United States", "Belgium"], //Correct answer [4]
 }; 
 
 // var questionCycle = [
@@ -38,8 +38,7 @@ $(document).ready(function() {
     $('.jumbotron').on('click', '#start', function() {
       console.log('Button clicked!'); 
       $('#start').hide();
-      comment(); 
-      correctAudio.play(); 
+      comment(); // Remember to remove later
 
       qSet1(); 
       setTimeout(qSet2, 1000 * 20); 
@@ -165,6 +164,7 @@ $(document).ready(function() {
       console.log(x); 
 
       if (correct) {
+        correctAudio.play(); 
         $('#comment').text(correctComments[x]); 
         $('#comment').animate({opacity: '1'}); 
         function fadeOut() {
@@ -172,6 +172,7 @@ $(document).ready(function() {
         }
         setTimeout(fadeOut, 1000 * 2); 
       } else {
+        incorrectAudio.play(); 
         $('#comment').text(incorrectComments[x]); 
         $('#comment').animate({opacity: '1'}); 
         function fadeOut() {
