@@ -18,6 +18,21 @@ var timerOn = false;
 var interval; 
 var time = 10; 
 var correct = false; // ---- Will need to set to true when correct answer is chosen then reset back to false for the next question.
+var answerSelected; 
+
+var userChoice; 
+// var q1Answer = questionArr.q1[2]; 
+// var q2Answer = 'choiceA'; 
+// var q3Answer = 'choiceB'; 
+// var q4Answer = 'choiceC'; 
+// var q5Answer = 'choiceD'; 
+
+
+var numCorrect = 0; 
+var numIncorrect = 0; 
+var numUnanswered = 0; 
+
+
 
 var correctComments = ['Nice!', 'Great job!', 'Keep it up!']; 
 var incorrectComments = ['Are you drunk?', 'Nope!', 'Way off!']; 
@@ -38,29 +53,78 @@ $(document).ready(function() {
     $('.jumbotron').on('click', '#start', function() {
       console.log('Button clicked!'); 
       $('#start').hide();
-      comment(); // Remember to remove later
+      // comment(); // Remember to remove later
 
       qSet1(); 
-      setTimeout(qSet2, 1000 * 20); 
-      setTimeout(qSet3, 1000 * 35); 
+      setTimeout(qSet2, 1000 * 15); 
+      setTimeout(qSet3, 1000 * 30); 
       setTimeout(qSet4, 1000 * 45); 
-      clearTimeout(qSet4); 
+      setTimeout(qSet5, 1000 * 60); 
+      setTimeout(endScreen, 1000 * 75); 
+
+      // clearTimeout(qSet5); 
 
       // Round 1 begins
       // Timer Starts counting down
       // setTimeout() ----> Used to delay an action until the end of the specified time 
-      
+         
+    }); // END Start 
+    
+    function checkAnswer(q) { ////////////////////////////////////
+      console.log('correct answer', q); 
+      if (!answerSelected) {
+        $('#answerChoices').on('click', '.btn', function() {
+        userChoice = ($(this).attr('id')); 
+        console.log('userChoice', userChoice); 
+          if (userChoice == q) {
+            correct = true; 
+            comment(); 
+            numCorrect++; 
+            console.log('numCorrect: ', numCorrect); 
+            offClick();  
+            return correct = false;
+          } else if (userChoice != q) {
+            correct = false; 
+            $(this).css("background-color", "rgb(143, 24, 24)"); // ------premanently changes background color. 
+            comment(); 
+            numIncorrect++; 
+            console.log('numIncorrect: ', numIncorrect); 
+            offClick();  
+          } else {
+          } // END if userChoice  
+        }); // END answer choice click()
+      } else {
+        numUnanswered++; 
+        console.log('numUnanswered: ', numUnanswered); 
+      }
+    }; // END checkAnswer () /////////////////////////////////////
+    
+    function offClick() {
+      $('#answerChoices').off('click', '.btn'); 
+    };
 
-          
-          
-          
-          
-          
-    }); 
-        
+   
+    // function checkAnswer(a) {
+    //   console.log('correct answer', a); 
+    //   if (!answerSelected) {
+    //     console.log('working so far...'); 
+    //     $('#answerChoices').on('click', '.btn', function() {
+    //       console.log('BUTTON CLICKED'); 
+    //       answerSelected = true; 
+    //       console.log(answerSelected);
+    //       offClick();
+    //       return answerSelected; 
+    //     }); 
+    //     return answerSelected; 
+    //   }
+    // }
+
     function qSet1() {
+      console.log('Q1'); 
+      answerSelected = false; 
       timerOn = true; 
-      timer(); 
+      // answerSelected = false; 
+      
       $('#questionTag').text(questionArr.q1[0]);
       
       // answerChoices for q1 displayed
@@ -70,17 +134,23 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q1[3]);
       $('#choiceD').text(questionArr.q1[4]);
       
+      timer(); 
+      checkAnswer('choiceB'); 
+
       //-----Better way to cycle through assignment of values??----
       // for (i = 0; i < questionArr.length; i++) {
       //   console.log(questionArr.q1[i]); 
       // }
 
+      
+
       // setTimeout(qSet1, 1000 * 10); 
     }; // END qSet1()
 
     function qSet2() {
+      console.log('Q2'); 
+      answerSelected = false; 
       timerOn = true; 
-      timer(); 
       $('#questionTag').text(questionArr.q2[0]);
       
       // answerChoices for q1 displayed
@@ -90,17 +160,16 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q2[3]);
       $('#choiceD').text(questionArr.q2[4]);
       
-      //-----Better way to cycle through assignment of values??----
-      // for (i = 0; i < questionArr.length; i++) {
-      //   console.log(questionArr.q1[i]); 
-      // }
+      timer(); 
+      checkAnswer('choiceA'); 
 
-      // setTimeout(qSet1, 1000 * 10); 
+
     }; // END qSet2()
 
     function qSet3() {
+      console.log('Q3');
+      answerSelected = false;  
       timerOn = true; 
-      timer(); 
       $('#questionTag').text(questionArr.q3[0]);
       
       // answerChoices for q1 displayed
@@ -110,17 +179,16 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q3[3]);
       $('#choiceD').text(questionArr.q3[4]);
       
-      //-----Better way to cycle through assignment of values??----
-      // for (i = 0; i < questionArr.length; i++) {
-      //   console.log(questionArr.q1[i]); 
-      // }
+      timer(); 
+      checkAnswer('choiceB'); 
 
       // setTimeout(qSet1, 1000 * 10); 
     }; // END qSet3()
 
     function qSet4() {
+      console.log('Q4'); 
+      answerSelected = false; 
       timerOn = true; 
-      timer(); 
       $('#questionTag').text(questionArr.q4[0]);
       
       // answerChoices for q1 displayed
@@ -130,14 +198,40 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q4[3]);
       $('#choiceD').text(questionArr.q4[4]);
       
-      //-----Better way to cycle through assignment of values??----
-      // for (i = 0; i < questionArr.length; i++) {
-      //   console.log(questionArr.q1[i]); 
-      // }
+      timer(); 
+      checkAnswer('choiceC'); 
 
-      // setTimeout(qSet1, 1000 * 10); 
     }; // END qSet4()
         
+    function qSet5() {
+      console.log('Q5'); 
+      answerSelected = false; 
+      timerOn = true; 
+      $('#questionTag').text(questionArr.q5[0]);
+      
+      // answerChoices for q1 displayed
+      $('#answerChoices').show();
+      $('#choiceA').text(questionArr.q5[1]);
+      $('#choiceB').text(questionArr.q5[2]);
+      $('#choiceC').text(questionArr.q5[3]);
+      $('#choiceD').text(questionArr.q5[4]);
+      
+      timer(); 
+      checkAnswer('choiceD'); 
+
+
+    }; // END qSet5()
+
+    function endScreen() {
+      $('#timerTag').text('Total Correct: ').append(numCorrect);
+       
+      $('#questionTag').text('Total Incorrect: ').append(numIncorrect).append('<br>Unanswered: ').append(numUnanswered);
+
+      $('#answerChoices').hide();
+
+
+    }; // END endScreen()
+
     function timer() {
       if (timerOn == true) {
         $('#timerTag').text(time); 
@@ -161,7 +255,7 @@ $(document).ready(function() {
 
     function comment() {
       var x = Math.floor(Math.random() * 3); 
-      console.log(x); 
+      // console.log(x); 
 
       if (correct) {
         correctAudio.play(); 

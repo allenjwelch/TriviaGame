@@ -30,12 +30,21 @@ h1 {
   margin: 10px; 
   font-size: 25px; 
   border: none; 
-  background-color: rgb(114, 108, 19); 
+  color: white; 
+  background-color: rgb(148, 142, 58); 
 }
 
-/* .btn:focus {
-  background-color: green; 
-} */
+.btn:hover {
+  background-color: rgb(102, 62, 25); 
+  color: white; 
+
+}
+
+.btn:focus {
+  background-color: rgb(102, 97, 25); 
+  color: white; 
+
+}
 
 #comment {
   color:  rgb(248, 246, 246); 
