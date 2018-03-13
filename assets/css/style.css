@@ -31,17 +31,20 @@ h1 {
   font-size: 25px; 
   border: none; 
   color: white; 
-  background-color: rgb(148, 142, 58); 
+  background-color: #948e3a; 
+
+  /* color: #aa2b2b; 
+  color: #3c993c;  */
 }
 
-.btn:hover {
-  background-color: rgb(102, 62, 25); 
-  color: white; 
 
+.btn:hover {
+  background-color: rgb(102, 97, 25); 
+  color: white; 
 }
 
 .btn:focus {
-  background-color: rgb(102, 97, 25); 
+  /* background-color: rgb(102, 62, 25);  */
   color: white; 
 
 }
