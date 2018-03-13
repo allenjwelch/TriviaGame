@@ -106,8 +106,7 @@ $(document).ready(function() {
           } // END if userChoice  
         }); // END answer choice click()
       } else {
-        numUnanswered++; 
-        console.log('numUnanswered: ', numUnanswered); 
+        
       }
     }; // END checkAnswer () /////////////////////
     
@@ -232,6 +231,8 @@ $(document).ready(function() {
         $('#timerTag').text('Times up!'); 
         timerOn = false; 
         clearInterval(interval); 
+        numUnanswered++; 
+        console.log('numUnanswered: ', numUnanswered); 
         time = 10; 
         return timerOn; 
       }
