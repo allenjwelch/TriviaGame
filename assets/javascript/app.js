@@ -51,26 +51,8 @@ $(document).ready(function() {
     $('#answerChoices').hide(); // --> initially hides answerChoices btns
     $('#lastCall').hide(); 
     // lastCall(); 
-
-    $('.jumbotron').on('click', '#start', function() {
-      console.log('Button clicked!'); 
-      $('#start').hide();
-
-      qSet1(); 
-      setTimeout(qSet2, 1000 * 15); 
-      setTimeout(qSet3, 1000 * 30); 
-      setTimeout(qSet4, 1000 * 45); 
-      setTimeout(qSet5, 1000 * 60); 
-      setTimeout(endScreen, 1000 * 75); 
-      // clearTimeout(endScreen); 
-
-
-
-      // Round 1 begins
-      // Timer Starts counting down
-      // setTimeout() ----> Used to delay an action until the end of the specified time 
-         
-    }); // END Start 
+    startBtn(); 
+    
     
     function checkAnswer(q) { /////////////////////
       console.log('correct answer', q); 
@@ -114,6 +96,33 @@ $(document).ready(function() {
       timer(); 
     }; // END questionSetReset
 
+    function startBtn() {
+      $('#start').show();
+      timerOn = false; 
+      time = 10; 
+      clearInterval(interval); 
+
+      $('.jumbotron').on('click', '#start', function() {
+        console.log('Button clicked!'); 
+        $('#start').hide();
+  
+        qSet1(); 
+        // setTimeout(qSet2, 1000 * 15); 
+        // setTimeout(qSet3, 1000 * 30); 
+        // setTimeout(qSet4, 1000 * 45); 
+        // setTimeout(qSet5, 1000 * 60); 
+        // setTimeout(endScreen, 1000 * 75); 
+        // clearTimeout(endScreen); 
+  
+  
+  
+        // Round 1 begins
+        // Timer Starts counting down
+        // setTimeout() ----> Used to delay an action until the end of the specified time 
+           
+      }); // END Start 
+    }; //END startBtn
+
     function qSet1() {
       console.log('Q1'); 
       $('#questionTag').text(questionArr.q1[0]);
@@ -127,6 +136,8 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceB'); 
+      setTimeout(qSet2, 1000 * 15); 
+
       // setTimeout(qSet2, 1000 * 10); 
 
       // if (answerSelected == false) {
@@ -156,6 +167,7 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceA'); 
+      setTimeout(qSet3, 1000 * 15); 
 
 
 
@@ -174,6 +186,8 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceB'); 
+      setTimeout(qSet4, 1000 * 15); 
+
 
     }; // END qSet3()
 
@@ -189,6 +203,8 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceC'); 
+      setTimeout(qSet5, 1000 * 15); 
+
 
     }; // END qSet4()
         
@@ -206,6 +222,8 @@ $(document).ready(function() {
       questionSetReset(); 
       // lastCall(); 
       checkAnswer('choiceD'); 
+      setTimeout(endScreen, 1000 * 15); 
+
 
     }; // END qSet5()
 
@@ -216,7 +234,7 @@ $(document).ready(function() {
 
       $('#answerChoices').hide();
 
-      setTimeout(gamePlay, 1000 * 5); 
+      setTimeout(startBtn, 1000 * 5); 
 
 
     }; // END endScreen()
@@ -242,7 +260,8 @@ $(document).ready(function() {
             console.log('numUnanswered: ', numUnanswered); 
           }
         time = 10; 
-        return timerOn; 
+        // return timerOn; 
+        return time = 10;
       }
     }; // END countDown()
 
