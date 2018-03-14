@@ -62,8 +62,9 @@ $(document).ready(function() {
       setTimeout(qSet4, 1000 * 45); 
       setTimeout(qSet5, 1000 * 60); 
       setTimeout(endScreen, 1000 * 75); 
+      // clearTimeout(endScreen); 
 
-      clearTimeout(endScreen); 
+
 
       // Round 1 begins
       // Timer Starts counting down
@@ -79,6 +80,7 @@ $(document).ready(function() {
         console.log('userChoice', userChoice); 
         var answer = "#" + q; 
         // console.log('answer', answer); 
+        answerSelected = true; 
         $(answer).css("background-color", "#3c993c");
           if (userChoice == q) {
             correct = true; 
@@ -89,15 +91,8 @@ $(document).ready(function() {
             offClick();  
             return correct = false;
           } else if (userChoice != q) {
-            correct = false; 
-            // $(this).animate({ background: rgb(143, 24, 24)});
-            // $(this).animate({backgroundColor: "#9b0505"});
-            // $(this).delay(5000).animate({ backgroundColor: "#948e3a"});
-            
-            $(this).css("background-color", "#aa2b2b"); // ------premanently changes background color. 
-            // $(this).delay('5000').css("background-color", "#948e3a"); // ------premanently changes background color. 
-
-
+            correct = false;            
+            $(this).css("background-color", "#aa2b2b"); // 
             comment(); 
             numIncorrect++; 
             console.log('numIncorrect: ', numIncorrect); 
@@ -105,9 +100,7 @@ $(document).ready(function() {
           } else {
           } // END if userChoice  
         }); // END answer choice click()
-      } else {
-        
-      }
+      } //END if answerSelected
     }; // END checkAnswer () /////////////////////
     
     function offClick() {
@@ -131,8 +124,17 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q1[3]);
       $('#choiceD').text(questionArr.q1[4]);
       
+      
       questionSetReset(); 
       checkAnswer('choiceB'); 
+      // setTimeout(qSet2, 1000 * 10); 
+
+      // if (answerSelected == false) {
+      //   setTimeout(qSet2, 1000 * 10); 
+      //   return answerSelected = true; 
+      // } else if (answerSelected == true) {
+      //   setTimeout(qSet2, 1000 * 1); 
+      // }
 
       //-----Better way to cycle through assignment of values??----
       // for (i = 0; i < questionArr.length; i++) {
@@ -154,6 +156,8 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceA'); 
+
+
 
     }; // END qSet2()
 
@@ -212,6 +216,8 @@ $(document).ready(function() {
 
       $('#answerChoices').hide();
 
+      setTimeout(gamePlay, 1000 * 5); 
+
 
     }; // END endScreen()
 
@@ -231,8 +237,10 @@ $(document).ready(function() {
         $('#timerTag').text('Times up!'); 
         timerOn = false; 
         clearInterval(interval); 
-        numUnanswered++; 
-        console.log('numUnanswered: ', numUnanswered); 
+          if (answerSelected == false) {
+            numUnanswered++; 
+            console.log('numUnanswered: ', numUnanswered); 
+          }
         time = 10; 
         return timerOn; 
       }
