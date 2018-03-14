@@ -14,7 +14,7 @@ var questionArr = {
 //   questionArr.q4
 // ];
 
-var timerOn = false; 
+// var timerOn = false; 
 var interval; 
 var time = 10; 
 var correct = false; // ---- Will need to set to true when correct answer is chosen then reset back to false for the next question.
@@ -98,9 +98,11 @@ $(document).ready(function() {
 
     function startBtn() {
       $('#start').show();
-      timerOn = false; 
-      time = 10; 
       clearInterval(interval); 
+      numCorrect = 0; 
+      numIncorrect = 0; 
+      numUnanswered = 0; 
+
 
       $('.jumbotron').on('click', '#start', function() {
         console.log('Button clicked!'); 
@@ -240,11 +242,13 @@ $(document).ready(function() {
     }; // END endScreen()
 
     function timer() {
-      if (timerOn == true) {
+      // if (timerOn === true) {
+        time = 10; 
         $('#timerTag').text(time); 
+        clearInterval(interval); 
         interval = setInterval(countDown, 1000);
-        return timerOn; 
-      }    
+        // return timerOn; 
+      // }    
     }; // END timer()
     
     function countDown() {
@@ -253,15 +257,15 @@ $(document).ready(function() {
         time--; 
       } else {
         $('#timerTag').text('Times up!'); 
-        timerOn = false; 
+        // timerOn = false; 
         clearInterval(interval); 
-          if (answerSelected == false) {
+          if (answerSelected === false) {
             numUnanswered++; 
             console.log('numUnanswered: ', numUnanswered); 
           }
-        time = 10; 
+        // time = 10; 
         // return timerOn; 
-        return time = 10;
+        // return time;
       }
     }; // END countDown()
 
