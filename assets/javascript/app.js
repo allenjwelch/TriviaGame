@@ -82,6 +82,7 @@ $(document).ready(function() {
           } else {
           } // END if userChoice  
         }); // END answer choice click()
+      return answerSelected; 
       } //END if answerSelected
     }; // END checkAnswer () /////////////////////
     
@@ -138,7 +139,17 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceB'); 
+      console.log('TEST'); 
+
       setTimeout(qSet2, 1000 * 15); 
+      
+      if (answerSelected === true) {
+        console.log('lksajdlkasjdlkjaslkdjalskjdlaskj'); 
+        $('#timerTag').text(''); 
+        clearTimeout(qSet2); 
+        setTimeout(qSet2, 1000 * 3); 
+      }
+
 
       // setTimeout(qSet2, 1000 * 10); 
 
