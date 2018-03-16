@@ -139,16 +139,15 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceB'); 
-      console.log('TEST'); 
 
       setTimeout(qSet2, 1000 * 15); 
       
-      if (answerSelected === true) {
-        console.log('lksajdlkasjdlkjaslkdjalskjdlaskj'); 
-        $('#timerTag').text(''); 
-        clearTimeout(qSet2); 
-        setTimeout(qSet2, 1000 * 3); 
-      }
+      // if (answerSelected === true) {
+      //   console.log('lksajdlkasjdlkjaslkdjalskjdlaskj'); 
+      //   $('#timerTag').text(''); 
+      //   clearTimeout(qSet2); 
+      //   setTimeout(qSet2, 1000 * 3); 
+      // }
 
 
       // setTimeout(qSet2, 1000 * 10); 
