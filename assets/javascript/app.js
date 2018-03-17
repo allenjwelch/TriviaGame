@@ -39,6 +39,8 @@ var incorrectComments = ['Are you drunk?', 'Nope!', 'Way off!', 'Seriously?'];
 var correctAudio = new Audio('../TriviaGame/assets/images/bottle3.mp3'); 
 var incorrectAudio = new Audio('../TriviaGame/assets/images/glassBreak.mp3'); 
 
+
+
 // console.log(questionArr.q1[0]); --> Displays question
 // var q1 = questionArr.q1[0]; 
 // console.log(questionArr[0]); 
@@ -53,78 +55,8 @@ $(document).ready(function() {
     // lastCall(); 
     startBtn(); 
     
-    
-    function checkAnswer(q) { /////////////////////
-      console.log('correct answer', q); 
-      if (!answerSelected) {
-        $('#answerChoices').on('click', '.btn', function() {
-        userChoice = ($(this).attr('id')); 
-        console.log('userChoice', userChoice); 
-        var answer = "#" + q; 
-        // console.log('answer', answer); 
-        answerSelected = true; 
-        $(answer).css("background-color", "#3c993c");
-          if (userChoice == q) {
-            correct = true; 
-            // $(this).css("background-color", "#3c993c");
-            comment(); 
-            numCorrect++; 
-            console.log('numCorrect: ', numCorrect); 
-            offClick();  
-            return correct = false;
-          } else if (userChoice != q) {
-            correct = false;            
-            $(this).css("background-color", "#aa2b2b"); // 
-            comment(); 
-            numIncorrect++; 
-            console.log('numIncorrect: ', numIncorrect); 
-            offClick();  
-          } else {
-          } // END if userChoice  
-        }); // END answer choice click()
-      return answerSelected; 
-      } //END if answerSelected
-    }; // END checkAnswer () /////////////////////
-    
-    function offClick() {
-      $('#answerChoices').off('click', '.btn'); 
-    }; // END offClick
-
-    function questionSetReset() {
-      answerSelected = false; 
-      timerOn = true; 
-      $('.btn').css("background-color", "#948e3a"); 
-      timer(); 
-    }; // END questionSetReset
-
-    function startBtn() {
-      $('#start').show();
-      clearInterval(interval); 
-      numCorrect = 0; 
-      numIncorrect = 0; 
-      numUnanswered = 0; 
-
-
-      $('.jumbotron').on('click', '#start', function() {
-        console.log('Button clicked!'); 
-        $('#start').hide();
-  
-        qSet1(); 
-        // setTimeout(qSet2, 1000 * 15); 
-        // setTimeout(qSet3, 1000 * 30); 
-        // setTimeout(qSet4, 1000 * 45); 
-        // setTimeout(qSet5, 1000 * 60); 
-        // setTimeout(endScreen, 1000 * 75); 
-        // clearTimeout(endScreen); 
-  
-  
-  
-        // Round 1 begins
-        // Timer Starts counting down
-        // setTimeout() ----> Used to delay an action until the end of the specified time 
-           
-      }); // END Start 
-    }; //END startBtn
+    var qSets = [qSet1, qSet2, qSet3, qSet4, qSet5, endScreen]; 
+    var x = 0; 
 
     function qSet1() {
       console.log('Q1'); 
@@ -135,19 +67,22 @@ $(document).ready(function() {
       $('#choiceB').text(questionArr.q1[2]);
       $('#choiceC').text(questionArr.q1[3]);
       $('#choiceD').text(questionArr.q1[4]);
-      
-      
-      questionSetReset(); 
-      checkAnswer('choiceB'); 
 
-      setTimeout(qSet2, 1000 * 15); 
-      
+      checkAnswer('choiceB'); 
+      questionSetReset();
+
+
       // if (answerSelected === true) {
       //   console.log('lksajdlkasjdlkjaslkdjalskjdlaskj'); 
       //   $('#timerTag').text(''); 
+      //   questionSetReset(); 
       //   clearTimeout(qSet2); 
       //   setTimeout(qSet2, 1000 * 3); 
       // }
+      
+
+      // setTimeout(qSet2, 1000 * 15); 
+      
 
 
       // setTimeout(qSet2, 1000 * 10); 
@@ -177,9 +112,10 @@ $(document).ready(function() {
       $('#choiceC').text(questionArr.q2[3]);
       $('#choiceD').text(questionArr.q2[4]);
       
-      questionSetReset(); 
-      checkAnswer('choiceA'); 
-      setTimeout(qSet3, 1000 * 15); 
+      questionSetReset(); // --- Move into checkAnswer()
+      checkAnswer('choiceA'); // --- Move into checkAnswer()
+
+      // setTimeout(qSet3, 1000 * 15); // --- Move into checkAnswer()
 
 
 
@@ -198,7 +134,7 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceB'); 
-      setTimeout(qSet4, 1000 * 15); 
+      // setTimeout(qSet4, 1000 * 15); 
 
 
     }; // END qSet3()
@@ -215,7 +151,7 @@ $(document).ready(function() {
       
       questionSetReset(); 
       checkAnswer('choiceC'); 
-      setTimeout(qSet5, 1000 * 15); 
+      // setTimeout(qSet5, 1000 * 15); 
 
 
     }; // END qSet4()
@@ -234,22 +170,116 @@ $(document).ready(function() {
       questionSetReset(); 
       // lastCall(); 
       checkAnswer('choiceD'); 
-      setTimeout(endScreen, 1000 * 15); 
+      // setTimeout(endScreen, 1000 * 15); 
 
 
     }; // END qSet5()
 
     function endScreen() {
-      $('#timerTag').text('Total Correct: ').append(numCorrect);
-       
-      $('#questionTag').text('Total Incorrect: ').append(numIncorrect).append('<br>Unanswered: ').append(numUnanswered);
+      
+      time = 0; 
 
+      function playAgain() {
+        $('#timerTag').empty();
+        $('#timerTag').text('Play Again?');
+      }
+
+
+      $('#questionTag').text('Total Correct: ').append(numCorrect).append('<br>Total Incorrect: ').append(numIncorrect).append('<br>Unanswered: ').append(numUnanswered);
+      
       $('#answerChoices').hide();
 
+      setTimeout(playAgain, 1000); 
       setTimeout(startBtn, 1000 * 5); 
 
 
+
     }; // END endScreen()
+    
+    function checkAnswer(q) { /////////////////////
+      console.log('correct answer', q); 
+      
+      if (!answerSelected) {
+        $('#answerChoices').on('click', '.btn', function() {
+          userChoice = ($(this).attr('id')); 
+        console.log('userChoice', userChoice); 
+        var answer = "#" + q; 
+        // console.log('answer', answer); 
+        answerSelected = true; 
+        $(answer).css("background-color", "#3c993c");
+        if (userChoice == q) {
+            correct = true; 
+            // $(this).css("background-color", "#3c993c");
+            comment(); 
+            numCorrect++; 
+            console.log('numCorrect: ', numCorrect); 
+            offClick();  
+            // questionSetReset(); ////////////// 
+            clearTimeout(qSets[x]); 
+            setTimeout(qSets[x], 1000 * 2); 
+            return correct = false;
+          } else if (userChoice != q) {
+            correct = false;            
+            $(this).css("background-color", "#aa2b2b"); // 
+            comment(); 
+            numIncorrect++; 
+            console.log('numIncorrect: ', numIncorrect); 
+            offClick();  
+            clearTimeout(qSets[x]); 
+            setTimeout(qSets[x], 1000 * 2); 
+          } else {
+          } // END if userChoice  
+        }); // END answer choice click()
+        x++; 
+        return answerSelected; 
+      } //END if answerSelected
+    }; // END checkAnswer () /////////////////////
+    
+    function offClick() {
+      $('#answerChoices').off('click', '.btn'); 
+    }; // END offClick
+    
+    function questionSetReset() {
+      answerSelected = false; 
+      // timerOn = true; 
+      $('.btn').css("background-color", "#948e3a"); 
+      timer(); 
+    }; // END questionSetReset
+    
+    function startBtn() {
+      $('#start').show();
+      clearInterval(interval); 
+      numCorrect = 0; 
+      numIncorrect = 0; 
+      numUnanswered = 0; 
+      x = 0; 
+
+      
+      
+      $('.jumbotron').on('click', '#start', function() {
+        console.log('Button clicked!'); 
+        $('#start').hide();
+        
+        qSets[0](); 
+
+        // qSet1(); 
+        // setTimeout(qSet2, 1000 * 15); 
+        // setTimeout(qSet3, 1000 * 30); 
+        // setTimeout(qSet4, 1000 * 45); 
+        // setTimeout(qSet5, 1000 * 60); 
+        // setTimeout(endScreen, 1000 * 75); 
+        // clearTimeout(endScreen); 
+        
+        
+        
+        // Round 1 begins
+        // Timer Starts counting down
+        // setTimeout() ----> Used to delay an action until the end of the specified time 
+        
+      }); // END Start 
+    }; //END startBtn
+    
+
 
     function timer() {
       // if (timerOn === true) {
@@ -270,6 +300,8 @@ $(document).ready(function() {
         // timerOn = false; 
         clearInterval(interval); 
           if (answerSelected === false) {
+            clearTimeout(qSets[x]); 
+            setTimeout(qSets[x], 1000 * 2); 
             numUnanswered++; 
             console.log('numUnanswered: ', numUnanswered); 
           }
