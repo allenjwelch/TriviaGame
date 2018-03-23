@@ -2,7 +2,7 @@
 
 https://allenjwelch.github.io/TriviaGame/
 
-![title image](trivia.PNG}
+![title image](trivia.PNG)
 
 5 Questions, 10 seconds each. 
 
